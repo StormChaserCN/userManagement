@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>User List</title>
+</head>
+<body >
+<div style="width:800px;margin-left:auto;margin-right:auto;">
+    <form action="#" th:object="${user}" th:action="@{/users/add}" method="post">
+        <label>User Name:</label>
+        <input type="text" name="name" th:field="*{name}"/><br />
+        <label>Department:</label>
+        <input type="text" name="department" th:field="*{department}"/><br />
+        <input type="submit" value="Add"/>
+    </form><br/>
+    <table border="1px">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Delete</th>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.name}">Name</td>
+            <td th:text="${user.department}">Department</td>
+            <td><a th:href="${'/users/edit/' + user.id}">Edit</a></td>
+            <td><a th:href="${'/users/delete/' + user.id}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

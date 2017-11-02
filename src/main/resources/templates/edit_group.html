@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Group</title>
+</head>
+<body>
+<div style="width:800px;margin-left:auto;margin-right:auto;">
+    <form action="#" th:object="${group}" th:action="@{/groups/update}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>Group Name:</label>
+        <input type="text" th:field="*{name}"/><br />
+        <input type="submit" value="Submit"/>
+    </form><br/>
+    <hr />
+    <form action="#" th:action="@{/groups/addUser}" method="post">
+        <input type="hidden" name="gid" th:value="${group.id}"/>
+        <label>User Id:</label>
+        <input type="text" name="uid"/><br/>
+        <input type="submit" value="Add"/>
+    </form><br/>
+    <table border="1px">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Department</th>
+        <tr th:each="user : ${group.userSet}">
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.name}">Name</td>
+            <td th:text="${user.department}">Department</td>
+            <td><a th:href="${'/groups/deleteUser/'+group.id+'/' + user.id}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

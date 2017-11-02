@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Group</title>
+</head>
+<body>
+<div style="width:800px;margin-left:auto;margin-right:auto;">
+    <form action="#" th:object="${user}" th:action="@{/users/update}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>User Name:</label>
+        <input type="text" name="name" th:field="*{name}"/><br/>
+        <label>Department:</label>
+        <input type="text" name="name" th:field="*{department}"/><br/>
+        <input type="submit" value="Submit"/>
+    </form><br/>
+</div>
+</body>
+</html>
