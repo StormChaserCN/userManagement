@@ -47,22 +47,15 @@ public class GroupController {
     }
 
     @RequestMapping("/deleteUser/{gid}/{uid}")
-    public String deleteGroupUser(@PathVariable Long gid, @PathVariable Long uid, Model model) {
-        groupService.delGroupUser(gid ,uid);
-
-        Group g = groupService.getGroupById(gid);
-        model.addAttribute("group", g);
-        model.addAttribute("uid", 0);
-        return "edit_group";
+    public String deleteGroupUser(@PathVariable Long gid, @PathVariable Long uid) {
+        groupService.delGroupUser(gid, uid);
+        return "redirect:/edit/" + gid;
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addGroupUser(@RequestParam("gid") Long gid, @RequestParam("uid") Long uid, Model model) {
+    public String addGroupUser(@RequestParam("gid") Long gid, @RequestParam("uid") Long uid) {
         groupService.addGroupUser(gid, uid);
-        Group g = groupService.getGroupById(gid);
-        model.addAttribute("group", g);
-        model.addAttribute("uid", 0);
-        return "edit_group";
+        return "redirect:/groups/edit/" + gid;
     }
 
 }
