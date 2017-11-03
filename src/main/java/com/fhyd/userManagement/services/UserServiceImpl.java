@@ -1,5 +1,6 @@
 package com.fhyd.userManagement.services;
 
+import com.fhyd.userManagement.models.Group;
 import com.fhyd.userManagement.models.User;
 import com.fhyd.userManagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
+        User u = userRepository.findOne(id);
+        for(Group group : u.getGroupSet())
+        {
+            group.getUserSet().remove(u);
+        }
         userRepository.delete(id);
         return;
     }
